@@ -63,7 +63,7 @@ bool solveTour(Knight &k, int it, short int matrix[N][N]) {
 				return 1;
 			} else {
 				matrix[k_jump.pos.x][k_jump.pos.y] = 0;
-				i+=2;
+				i++;
 			}
 		}
 	}
