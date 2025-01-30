@@ -5,6 +5,8 @@
 	#define N 8 
 #endif 
 
+// dev branch
+
 class Pos {
 	public: 
 		short int x;
