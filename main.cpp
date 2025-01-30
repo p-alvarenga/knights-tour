@@ -41,6 +41,7 @@ int main (void) {
 
 bool solveTour(Knight &k, int it, short int matrix[N][N]) {
 	Pos p;
+	Knight k_jump; 
 
 	if (it == 65) {
 		printMatrix(matrix);
@@ -49,7 +50,6 @@ bool solveTour(Knight &k, int it, short int matrix[N][N]) {
 	}
 
 	for (int i = 0; i < N; i++) {
-		Knight k_jump; 
 		p = k.move(i);
 
 		if (p.validate() && matrix[p.x][p.y] == 0) {
