@@ -1,34 +1,24 @@
 #ifndef POS__H__
 #define POS__H__
 
-#ifndef N 
-	#define N 8 
-#endif 
+#include "constants.h"
+
 
 class Pos {
 	public: 
-		short int x;
-		short int y; 
+		int x;
+		int y; 
 
-		Pos(short int x = 0, short int y = 0); 
-		void set(const short int &x, const short int &y);
-		bool validate() const; 
+		inline Pos(int _x = 0, int _y = 0) noexcept : x(_x), y(_y) {}; 
+		
+		inline void set(int _x, int _y) noexcept {
+			this->x = _x;
+			this->y = _y;
+		}
+		
+		inline bool validate() const {
+			return !(x < 0 || x >= N || y < 0 || y >= N);  
+		} 
 };
-
-void Pos::set(const short int &x, const short int &y) {
-	this->x = x;
-	this->y = y; 
-	
-	return;
-}
-
-bool Pos::validate() const {
-	return !(x < 0 || x >= N || y < 0 || y >= N);  
-}
-
-Pos::Pos(short int x, short int y) {
-	this->x = x;
-	this->y = y;
-}
 
 #endif
