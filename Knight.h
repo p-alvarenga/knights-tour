@@ -20,15 +20,9 @@ class Knight {
 Pos Knight::move(const int &dir) const { 
 	static const short int map_x[N] = { -2, -2, -1, 1, 2, 2, 1, -1 }; 
 	static const short int map_y[N] = { -1, 1, 2, 2, 1, -1, -2, -2 }; 
-	
-	Pos p; 
 
-	p.set(pos.x + map_x[dir], pos.y + map_y[dir]);
 
-	if (!p.validate())
-		p.set(-1, -1);
-
-	return p; 
+	return Pos(pos.x + map_x[dir], pos.y + map_y[dir]);
 }
 
 /* . . 0 . 1 . . 
@@ -48,7 +42,6 @@ Pos Knight::move(const int &dir) const {
  *
  * x: [ 0 0 1 1 0 0 1 1 ] (+1)
  * y: ![x] (+1)
- *
  */ 
 
 #endif

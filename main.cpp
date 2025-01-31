@@ -32,44 +32,37 @@ int main(void) {
 	return 0;
 }
 
-bool solveTour(Knight &k, int it, short int matrix[N][N]) {
-	Pos p;
+bool solveTour(Knight &k, short int it, short int matrix[N][N]) {
+	static Pos p;
 	Knight k_jump;
 
-	if (it == N*N + 1) {
+	if (it == N*N) {
 		return 1;
 	}
 
-	for (int i = 0; i < N; i++) {
+	for (short int i = 0; i < N; i++) {
 		p = k.move(i);
 
-    if (p.validate() && matrix[p.x][p.y] == 0) {
-      // matrix[k.pos.x][k.pos.y] = it - 1;
-		matrix[p.x][p.y] = it;
-		k_jump.pos = p;
+		if (p.validate() && matrix[p.x][p.y] == 0) {
+			matrix[p.x][p.y] = it;
+			k_jump.pos = p;
 
-		if (solveTour(k_jump, it + 1, matrix)) {
-        // printMatrix(matrix);
-
-			return 1;
-		} else {
-			matrix[k_jump.pos.x][k_jump.pos.y] = 0;
-			i++;
+			if (solveTour(k_jump, it + 1, matrix)) {
+				return 1;
+			} else {
+				matrix[k_jump.pos.x][k_jump.pos.y] = 0;
+				i++;
+			}
 		}
-    }
   }
-
-  // printMatrix(matrix);
 
   return 0;
 }
 
 void printMatrix(short int matrix[N][N]) {
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
+	for (short int i = 0; i < N; i++) {
+		for (short int j = 0; j < N; j++) {
 			matrix[i][j] > 9 ? printf(" ") : printf("  ");
-
-      // matrix[i][j] != 0 ? printf("%i", matrix[i][j]) : printf("-");
 
 			switch (matrix[i][j]) {
 			case 0:
@@ -85,7 +78,7 @@ void printMatrix(short int matrix[N][N]) {
 		}
 		printf("\n");
 	}
-	printf("\n\n");
+	printf("\n");
 
 	return;
 }
