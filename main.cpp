@@ -1,14 +1,9 @@
 #include <stdio.h>
 #include <time.h>
 
-#define C_EMPTY "."
-
 #include "constants.h"
 #include "Pos.h"
 #include "Knight.h"
-
-#define INIT_X 0
-#define INIT_Y 0
 
 void printMatrix(short int matrix[N][N]);
 bool solveTour(Knight k, int it, short int matrix[N][N]);
