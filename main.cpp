@@ -1,17 +1,18 @@
 #include <stdio.h>
 #include <time.h>
 
-#define N 8 // Matrix Size [N x N]
 #define C_EMPTY "."
 
-#include "./Knight.h"
-#include "./Pos.h"
+#include "constants.h"
+#include "Pos.h"
+#include "Knight.h"
+#include "validateTour.h"
 
 #define INIT_X 0
 #define INIT_Y 0
 
 void printMatrix(short int matrix[N][N]);
-bool solveTour(Knight &k, int it, short int matrix[N][N]);
+bool solveTour(Knight k, int it, short int matrix[N][N]);
 bool availableMove(Pos p, short int matrix[N][N]);
 
 int main(void) {
@@ -26,21 +27,24 @@ int main(void) {
 	solveTour(k, 2, matrix);
 	clock_t end = clock();
 
+	matrix[1][2] = 60;
 	printMatrix(matrix);
-	printf("Time spent: %f", (double)(end - begin) / CLOCKS_PER_SEC);
+	printf("> Time spent: %f\n", (double)(end - begin) / CLOCKS_PER_SEC);
+	
+	validateTour(matrix) ? printf("\n> tour passed\n") : printf("> tour not passed"); 
 
 	return 0;
 }
 
-bool solveTour(Knight &k, short int it, short int matrix[N][N]) {
-	static Pos p;
+bool solveTour(Knight k, int it, short int matrix[N][N]) {
+	static Pos p; // helper
 	Knight k_jump;
 
-	if (it == N*N) {
+	if (it == N*N + 1) {
 		return 1;
 	}
 
-	for (short int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++) {
 		p = k.move(i);
 
 		if (p.validate() && matrix[p.x][p.y] == 0) {
@@ -51,7 +55,7 @@ bool solveTour(Knight &k, short int it, short int matrix[N][N]) {
 				return 1;
 			} else {
 				matrix[k_jump.pos.x][k_jump.pos.y] = 0;
-				i++;
+				i += 3;
 			}
 		}
   }
@@ -60,8 +64,10 @@ bool solveTour(Knight &k, short int it, short int matrix[N][N]) {
 }
 
 void printMatrix(short int matrix[N][N]) {
-	for (short int i = 0; i < N; i++) {
-		for (short int j = 0; j < N; j++) {
+	printf(".-------------------------.\n|");
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
 			matrix[i][j] > 9 ? printf(" ") : printf("  ");
 
 			switch (matrix[i][j]) {
@@ -69,16 +75,16 @@ void printMatrix(short int matrix[N][N]) {
 				printf(C_EMPTY);
 				break;
 			case 99:
-				printf(" #");
+				printf(" #"); // DEBUGGING
 				break;
 			default:
 				printf("%i", matrix[i][j]);
 				break;
 			}
 		}
-		printf("\n");
+		printf(" |\n|");
 	}
-	printf("\n");
+	printf("\b.-------------------------.\n");
 
 	return;
 }
