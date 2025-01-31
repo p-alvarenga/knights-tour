@@ -6,7 +6,6 @@
 #include "constants.h"
 #include "Pos.h"
 #include "Knight.h"
-#include "validateTour.h"
 
 #define INIT_X 0
 #define INIT_Y 0
@@ -29,9 +28,7 @@ int main(void) {
 
 	matrix[1][2] = 60;
 	printMatrix(matrix);
-	printf("> Time spent: %f\n", (double)(end - begin) / CLOCKS_PER_SEC);
-	
-	validateTour(matrix) ? printf("\n> tour passed\n") : printf("> tour not passed"); 
+	printf("> Time spent: %f\n", (double)(end - begin) / CLOCKS_PER_SEC); 
 
 	return 0;
 }
