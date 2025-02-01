@@ -3,7 +3,6 @@
 
 #include "constants.h"
 
-
 class Pos {
 	public: 
 		int x;
