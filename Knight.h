@@ -4,10 +4,10 @@
 #include "Pos.h"
 #include "constants.h"
 
-class Knight {
+class Knight {	
 	private: 
-		static constexpr int map_x[8] = { -2, -2, -1, 1, 2, 2, 1, -1 }; 
-		static constexpr int map_y[8] = { -1, 1, 2, 2, 1, -1, -2, -2 }; 
+		static constexpr int map_x[KNIGHT_M] = { -2, -2, -1, 1, 2, 2, 1, -1 }; 
+		static constexpr int map_y[KNIGHT_M] = { -1, 1, 2, 2, 1, -1, -2, -2 }; 
 
 	public: 
 		Pos pos;
@@ -18,6 +18,7 @@ class Knight {
 
 		Knight() = default;
 };
+
 
 /* . 0 . 1 .  
  * 7 . . . 2  

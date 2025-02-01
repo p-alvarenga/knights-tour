@@ -1,82 +1,64 @@
 #include <stdio.h>
 #include <time.h>
+#include <cmath>
 
 #include "constants.h"
 #include "Pos.h"
 #include "Knight.h"
+#include "printMatrix.h"
 
-void printMatrix(short int matrix[N][N]);
-bool solveTour(Knight k, int it, short int matrix[N][N]);
-bool availableMove(Pos p, short int matrix[N][N]);
+void printMatrix(int matrix[N][N]);
+bool solveTour(Knight k, int it, int matrix[N][N]);
+bool availableMove(Pos p, int matrix[N][N]);
 
 int main(void) {
-	short int matrix[N][N] = { 0 };
+	int matrix[N][N] = { 0 };
 
 	Knight k;
 	k.pos.set(INIT_X, INIT_Y);
 	
 	matrix[INIT_X][INIT_Y] = 1;
 
+	printf("\nsolving for N = %i | OPT_MV = %i...\n\n", N, OPT_MV);
+
 	clock_t begin = clock();
 	solveTour(k, 2, matrix);
-	clock_t end = clock();
-
-	matrix[1][2] = 60;
+	clock_t end = clock(); 
+	
 	printMatrix(matrix);
 	printf("> Time spent: %f\n", (double)(end - begin) / CLOCKS_PER_SEC); 
 
 	return 0;
 }
 
-bool solveTour(Knight k, int it, short int matrix[N][N]) {
+bool solveTour(Knight k, int it, int matrix[N][N]) {
 	static Pos p; // helper
-	Knight k_jump;
 
-	if (it == N*N + 1) {
+	Knight knext;
+
+	if (it == N_MAX + 1) {
 		return 1;
 	}
 
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < KNIGHT_M; i++) {
 		p = k.move(i);
 
 		if (p.validate() && matrix[p.x][p.y] == 0) {
 			matrix[p.x][p.y] = it;
-			k_jump.pos = p;
+			knext.pos = p;
 
-			if (solveTour(k_jump, it + 1, matrix)) {
+			if (solveTour(knext, it + 1, matrix)) {
 				return 1;
 			} else {
-				matrix[k_jump.pos.x][k_jump.pos.y] = 0;
-				i += 3;
+				matrix[knext.pos.x][knext.pos.y] = 0;
+				i += OPT_MV;
 			}
 		}
-  }
+	}
 
   return 0;
 }
+// also, using a .h is better, isn'it? 
+// not only for printMatrix(), but, maybe, for solveTour(...)? 
+// _MAYBE_ turning solveTour into a clas 
 
-void printMatrix(short int matrix[N][N]) {
-	printf(".-------------------------.\n|");
-
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			matrix[i][j] > 9 ? printf(" ") : printf("  ");
-
-			switch (matrix[i][j]) {
-			case 0:
-				printf(C_EMPTY);
-				break;
-			case 99:
-				printf(" #"); // DEBUGGING
-				break;
-			default:
-				printf("%i", matrix[i][j]);
-				break;
-			}
-		}
-		printf(" |\n|");
-	}
-	printf("\b.-------------------------.\n");
-
-	return;
-}
