@@ -21,7 +21,6 @@ int main(void) {
 	solveTour(k, 2, matrix);
 	clock_t end = clock();
 
-	matrix[1][2] = 60;
 	printMatrix(matrix);
 	printf("> Time spent: %f\n", (double)(end - begin) / CLOCKS_PER_SEC); 
 
