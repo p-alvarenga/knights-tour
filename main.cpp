@@ -22,9 +22,9 @@ int main(void) {
 	
 
 	clock_t begin = clock();
-	Priority(priority);
+	k.setPriority(priority);
 
-	clock_t end = clock()		
+	clock_t end = clock();
 
 	double delta = (double)(end - begin)/CLOCKS_PER_SEC;
 
@@ -38,6 +38,7 @@ int main(void) {
 			matrix[p.x][p.y] = priority[i];
 		}
 	}
+
 	printMatrix(matrix);
 	printf("> Time spent: %f\n", delta); 
 
