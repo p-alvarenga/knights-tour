@@ -1,30 +1,67 @@
 #ifndef KNIGHT__H__
 #define KNIGHT__H__
 
-#include "Pos.h"
+#include "Point.h"
 #include "constants.h"
 
+
 class Knight {	
-	private: 
-		static constexpr int map_x[KNIGHT_M] = { -2, -2, -1, 1, 2, 2, 1, -1 }; 
-		static constexpr int map_y[KNIGHT_M] = { -1, 1, 2, 2, 1, -1, -2, -2 }; 
+	private:                        
+		static constexpr int map_x[KNIGHT_MV] = { -2, -2, +1, +1, -1, -1, +2, +2 };
+		static constexpr int map_y[KNIGHT_MV] = { -1, +1, -2, +2, -2, +2, -1, +1 };
 
-	public: 
-		Pos pos;
+	public:
+		Point pos; 
 
-		inline Pos move(int dir) const { 
-			return Pos(pos.x + map_x[dir], pos.y + map_y[dir]);
+		inline Point move(int dir) {
+			return Point(pos.x + map_x[dir], pos.y + map_y[dir]);
+		} 
+	
+		inline Point movePoint(int dir, Point &p) {
+			return Point(p.x + map_x[dir], p.y + map_y[dir]);
 		}
 
-		Knight() = default;
+	
+		void setPriority(int priority[8]) {
+			static int acc{-1};
+			static int calc_moves = {0};
+
+			static Point k_mv;
+
+			for (int m = 0; m < 8; m++) {
+				priority[m] = -1;
+				acc = -1; // every move can return to it's initial state. 
+
+				k_mv = move(m);
+				
+				if (!k_mv.validate())
+					continue;
+
+				for (int i = 0; i < 8; i++) {
+					if (movePoint(i, k_mv).validate()) { 
+						acc++;
+					}
+				}
+				
+
+				priority[m] = acc;
+			}
+
+			return;
+		}
+
+
+		inline Knight(int x_ = 0, int y_ = 0) {
+			pos.set(x_, y_);
+		};
+
 };
 
-
 /* . 0 . 1 .  
- * 7 . . . 2  
+ * 4 . . . 5  
  * . . k . .  
- * 6 . . . 3  
- * . 5 . 4 . 
+ * 2 . . . 3  
+ * . 6 . 7 . 
  *
  * 0 = (k.y - 1, k.x - 2)
  * 1 = (k.y + 1, k.x - 2)
