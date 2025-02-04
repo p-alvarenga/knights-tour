@@ -4,13 +4,14 @@ This is a repository to explore optimization using a CS classic problem: [Knight
 ### Configuration 
 You can set `constants.h` the way you prefer, setting: 
 
-`N` to define the board size. _note: there are no solutions for `N < 5`_
-`INIT_X`, `INIT_Y` to define the init position of the knight. 
+1. `N` to define the board size. _note: there are no solutions for `N < 5`_
+2. `INIT_X`, `INIT_Y` to define the init position of the knight. 
 
 
 ### Building: 
 
-`g++ g++ -O3 -march=native -flto -fprofile-generate -funroll-loops -ftree-vectorize -fomit-frame-pointer -ffast-math -fno-exceptions main.cpp -o knight`
-
+```
+g++ -O3 -march=native -flto -fprofile-generate -funroll-loops -ftree-vectorize -fomit-frame-pointer -ffast-math -fno-exceptions main.cpp -o knight`
+```
 
 ## 
