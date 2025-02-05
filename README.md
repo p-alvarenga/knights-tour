@@ -8,7 +8,7 @@ You can set `constants.h` the way you prefer, setting:
 2. `INIT_X`, `INIT_Y` to define the init position of the knight. 
 
 
-### Building: 
+### Building 
 
 ```
 g++ -O3 -march=native -flto -fprofile-generate -funroll-loops -ftree-vectorize -fomit-frame-pointer -ffast-math -fno-exceptions main.cpp -o knight
@@ -21,7 +21,8 @@ g++ -O3 -march=native -flto -fprofile-generate -funroll-loops -ftree-vectorize -
 > The program may not be able to solve any N with N Init Position because of the constant `OPT_MV` constant declared inside `constants.h` file. 
 > 
 > So, if you are getting any problems to solve a given case, you can try setting `OPT_MV` to a value between 0 and 6. 
-> Also, performance may be affected by changing the `OPT_MV` constant. 
+> Also, performance may be affected by changing the `OPT_MV` constant.
 
+### The Project Destiny 
 
-## 
+- [ ] Reduce the classes `Knight` and `Pos` into one class `Position` and a namespace `kni` (responsible to the functional functions, such as `Knight::move()`), making the Knight a instance of the class ``.  
