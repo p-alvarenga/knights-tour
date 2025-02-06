@@ -25,4 +25,4 @@ g++ -O3 -march=native -flto -fprofile-generate -funroll-loops -ftree-vectorize -
 
 ### The Project Destiny 
 
-- [ ] Reduce the classes `Knight` and `Pos` into one class `Position` and a namespace `kni` (responsible to the functional functions, such as `Knight::move()`), making the Knight a instance of the class ``.  
+- [ ] Reduce the classes `Knight` and `Pos` into one class `Position` and a namespace `kni` (responsible to the functional functions, such as `Knight::move()`), making the Knight a instance of the class `Position`.  
