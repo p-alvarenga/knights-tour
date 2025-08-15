@@ -28,4 +28,4 @@ g++ -O3 -march=native -flto -fprofile-generate -funroll-loops -ftree-vectorize -
  
 - [ ] Understand and choose efficiently between the `OPT_MV` constant value in compile-time (using `constexpr`)
 - [ ] Make `class Knight` a child of `class Pos`. Making `Pos::validate()` and `Pos::set()` also part of `Knight`
-- [x] Fix file structure into `./include/` & `./src/`;
+- [x] Fix file structure into `./include/`;
