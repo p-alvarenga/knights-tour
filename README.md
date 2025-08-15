@@ -27,5 +27,15 @@ g++ -O3 -march=native -flto -fprofile-generate -funroll-loops -ftree-vectorize -
 ### To-do
  
 - [ ] Understand and choose efficiently between the `OPT_MV` constant value in compile-time (using `constexpr`)
-- [ ] Make `class Knight` a child of `class Pos`. Making `Pos::validate()` and `Pos::set()` also part of `Knight`
+- [x] Make `class Knight` a child of `class Pos`. Making `Pos::validate()` and `Pos::set()` also part of `Knight`
 - [x] Fix file structure into `./include/`;
+
+
+### Brainstorm 
+
+1. Predict how many movement directions are available from a given position.
+    - Assign a "weight" to each possible movement (e.g., `[x][y]` has 4 possible moves, `[a][b]` has 2).
+    - Use the weights to guide the program toward positions with more (or fewer) possibilities, depending on the strategy.2
+
+2. A method that returns a `std::vector<int>` (or a more efficient structure) containg all movement directions from the current position
+    - This avoids checking every direction and allows iteration over only valid ones.
