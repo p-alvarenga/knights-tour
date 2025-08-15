@@ -2,14 +2,13 @@
 #include <time.h>
 #include <cmath>
 
-#include "constants.h"
-#include "Pos.h"
-#include "Knight.h"
-#include "printMatrix.h"
+#include "include/constants.h"
+#include "include/pos.h"
+#include "include/knight.h"
+#include "include/print-matrix.h"
 
 void printMatrix(int matrix[N][N]);
 bool solveTour(Knight k, int it, int matrix[N][N]);
-bool availableMove(Pos p, int matrix[N][N]);
 
 int main(void) {
 	int matrix[N][N] = { 0 };
@@ -31,34 +30,35 @@ int main(void) {
 	return 0;
 }
 
-bool solveTour(Knight k, int it, int matrix[N][N]) {
+bool solveTour(Knight k, int it, int matrix[N][N]) 
+{
 	static Pos p; // helper
 
-	Knight knext;
+	Knight k_next;
 
-	if (it == N_MAX + 1) {
-		return 1;
-	}
+	if (it == N_MAX + 1) return true;
 
-	for (int i = 0; i < KNIGHT_M; i++) {
+	for (int i = 0; i < KNIGHT_M; i++) 
+	{
 		p = k.move(i);
 
-		if (p.validate() && matrix[p.x][p.y] == 0) {
+		if (p.validate() && matrix[p.x][p.y] == 0) 
+		{
 			matrix[p.x][p.y] = it;
-			knext.pos = p;
+			k_next.pos = p;
 
-			if (solveTour(knext, it + 1, matrix)) {
-				return 1;
-			} else {
-				matrix[knext.pos.x][knext.pos.y] = 0;
+			if (!solveTour(k_next, it + 1, matrix))
+			{
+				matrix[k_next.pos.x][k_next.pos.y] = 0;
 				i += OPT_MV;
 			}
+			else return true;	
 		}
 	}
 
-  return 0;
+
+	return false;
 }
 // also, using a .h is better, isn'it? 
 // not only for printMatrix(), but, maybe, for solveTour(...)? 
-// _MAYBE_ turning solveTour into a clas 
-
+// _MAYBE_ turning solveTour into a class

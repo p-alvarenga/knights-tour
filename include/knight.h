@@ -1,23 +1,30 @@
 #ifndef KNIGHT__H__
 #define KNIGHT__H__
 
-#include "Pos.h"
 #include "constants.h"
+#include "pos.h"
 
-class Knight {	
+#include <iostream> // <- remove
+
+class Knight { // : public Pos { # < !
 	private: 
-		static constexpr int map_x[KNIGHT_M] = { -2, -2, -1, 1, 2, 2, 1, -1 }; 
-		static constexpr int map_y[KNIGHT_M] = { -1, 1, 2, 2, 1, -1, -2, -2 }; 
-
+		static constexpr int map_x[KNIGHT_M] = { -2, -2, -1, 1, 2, 2, 1, -1 };
+		static constexpr int map_y[KNIGHT_M] = { -1, 1, 2, 2, 1, -1, -2, -2 };
+	
 	public: 
 		Pos pos;
 
-		inline Pos move(int dir) const { 
-			return Pos(pos.x + map_x[dir], pos.y + map_y[dir]);
+		inline Pos move(int dir) const;
+		~Knight() 
+		{
+			std::cout << "test!";
 		}
-
-		Knight() = default;
 };
+
+inline Pos Knight::move(int dir) const 
+{
+	return Pos(pos.x + map_x[dir], pos.y + map_y[dir]); 
+}
 
 
 /* . 0 . 1 .  

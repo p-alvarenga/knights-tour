@@ -23,6 +23,9 @@ g++ -O3 -march=native -flto -fprofile-generate -funroll-loops -ftree-vectorize -
 > So, if you are getting any problems to solve a given case, you can try setting `OPT_MV` to a value between 0 and 6. 
 > Also, performance may be affected by changing the `OPT_MV` constant.
 
-### The Project Destiny 
 
-- [ ] Reduce the classes `Knight` and `Pos` into one class `Position` and a namespace `kni` (responsible to the functional functions, such as `Knight::move()`), making the Knight a instance of the class `Position`.  
+### To-do
+ 
+- [ ] Understand and choose efficiently between the `OPT_MV` constant value in compile-time (using `constexpr`)
+- [ ] Make `class Knight` a child of `class Pos`. Making `Pos::validate()` and `Pos::set()` also part of `Knight`
+- [x] Fix file structure into `./include/` & `./src/`;
